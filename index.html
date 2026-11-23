@@ -1,0 +1,1938 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f3ed">
+  <title>ひとこと英会話・一文復習</title>
+  <style>
+    :root {
+      --primary: #27634e;
+      --primary-hover: #1e4d3c;
+      --bg: #f5f3ed;
+      --card-bg: #ffffff;
+      --text: #26352f;
+      --muted: #718078;
+      --border: #e5e5dd;
+      --accent: #d9534f;
+      --accent-bg: #fdf2f2;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      font-size: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100dvh; background: var(--bg); }
+    .wrap { max-width: 760px; margin: auto; padding: 20px 18px 60px; }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .brand {
+      font-weight: 750;
+      color: var(--primary);
+      font-size: 20px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: .1em;
+    }
+    .header-btns {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(39, 69, 51, 0.05);
+    }
+    .muted { color: var(--muted); }
+    .eyebrow { font-size: 12px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; margin: 0 0 6px; }
+    .title { font-size: 26px; line-height: 1.3; margin: 6px 0 16px; }
+    
+    .search, textarea, select {
+      width: 100%;
+      border: 1px solid #d9ded8;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+      background: #fff;
+      color: inherit;
+    }
+    .search:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(39, 99, 78, 0.15);
+    }
+    .search { margin: 14px 0; }
+    
+    .mode-bar {
+      display: flex;
+      background: #e9ece6;
+      border-radius: 14px;
+      padding: 4px;
+      margin-bottom: 20px;
+      gap: 4px;
+    }
+    .mode-btn {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .mode-btn.active {
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    
+    .lesson-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 12px;
+    }
+    .lesson {
+      padding: 14px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-align: left;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      transition: border-color .15s ease, transform .1s ease;
+    }
+    .lesson:hover {
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+    .lesson b { display: block; font-size: 15px; color: var(--text); }
+    .lesson small { display: block; color: var(--muted); margin-top: 6px; font-size: 12px; }
+    
+    .button {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: background-color .15s ease, opacity .15s ease;
+    }
+    .button:active { opacity: 0.85; }
+    .primary { background: var(--primary); color: #fff; }
+    .primary:hover { background: var(--primary-hover); }
+    .secondary { background: #edf1ec; color: #294239; }
+    .secondary:hover { background: #e2e8e0; }
+    .danger { background: var(--accent-bg); color: var(--accent); }
+    .full { width: 100%; margin-top: 12px; }
+    .icon-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 12px;
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .icon-btn:hover { background: #f0f3ee; }
+    
+    .prompt-box {
+      margin: 24px 0 28px;
+    }
+    .prompt {
+      font-size: clamp(22px, 5.5vw, 30px);
+      line-height: 1.5;
+      font-weight: 700;
+      margin: 8px 0;
+    }
+    
+    .answer-box {
+      margin-top: 20px;
+      padding: 20px;
+      background: #f3f6f1;
+      border-radius: 16px;
+      border: 1px solid #e1e8df;
+    }
+    .answer-text {
+      font-size: clamp(20px, 5vw, 24px);
+      line-height: 1.5;
+      color: #1a4234;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .speech-btn {
+      background: #fff;
+      border: 1px solid #c7d4c5;
+      border-radius: 10px;
+      padding: 7px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .speech-btn:hover { background: #eef4ed; }
+    
+    .row { display: flex; gap: 10px; }
+    .row > * { flex: 1; }
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .back {
+      border: 0;
+      background: none;
+      color: var(--primary);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 6px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .back:hover { text-decoration: underline; }
+    .small { font-size: 13px; color: var(--muted); }
+    textarea { min-height: 200px; line-height: 1.6; font-family: monospace; font-size: 13px; }
+    .notice {
+      background: #fff8e8;
+      border: 1px solid #fae2ad;
+      color: #7d5a11;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 12px 0;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #e2ede7;
+      color: var(--primary);
+    }
+    .badge-data {
+      background: #d8ecdf;
+      color: #1b5e3a;
+      border: 1px solid #a8d5b8;
+    }
+    .count { font-size: 13px; color: var(--muted); }
+    
+    @media (max-width: 520px) {
+      .wrap { padding: 14px 12px 40px; }
+      .card { padding: 18px 16px; border-radius: 18px; }
+      .lesson-list { grid-template-columns: 1fr; }
+      .title { font-size: 22px; }
+      .prompt { font-size: 20px; }
+      .answer-text { font-size: 18px; }
+    }
+  </style>
+  <!-- キャッシュバスター付きで dialogs.js を読み込み -->
+  <script src="./dialogs.js?v=20261123_all"></script>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <a href="#home" class="brand">
+        ひとこと英会話
+        <small>ONE SENTENCE REVIEW · 2026</small>
+      </a>
+      <div class="header-btns">
+        <button id="importExportBtn" class="icon-btn" title="データ取り込み・保存">📂 データ管理</button>
+      </div>
+    </header>
+
+    <section id="screen"></section>
+  </main>
+
+  <script id="catalog" type="application/json">
+[
+  {
+    "lesson": 1,
+    "theme": "発言パターン　あいさつ①",
+    "url": "https://get-the-dream.com/20260330",
+    "status": "本文取得済み",
+    "keySentence": "Hi. How’s it going?"
+  },
+  {
+    "lesson": 2,
+    "theme": "発言パターン　あいさつ② – あいさつへの受け",
+    "url": "https://get-the-dream.com/20260331",
+    "status": "本文取得済み",
+    "keySentence": "What's up? - Not much."
+  },
+  {
+    "lesson": 3,
+    "theme": "発言パターン　あいさつ③ – 久しぶりの相手とのあいさつ",
+    "url": "https://get-the-dream.com/20260401",
+    "status": "本文取得済み",
+    "keySentence": "Long time no see. How have you been?"
+  },
+  {
+    "lesson": 4,
+    "theme": "発言パターン　お悔やみを述べる",
+    "url": "https://get-the-dream.com/20260402",
+    "status": "本文取得済み",
+    "keySentence": "I’m really sorry about your loss. My condolences."
+  },
+  {
+    "lesson": 5,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260403",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 6,
+    "theme": "発言パターン　祝福する",
+    "url": "https://get-the-dream.com/20260406",
+    "status": "本文取得済み",
+    "keySentence": "Congratulations! I’m so proud of you."
+  },
+  {
+    "lesson": 7,
+    "theme": "発言パターン　あいさつからの流れ① – 相手の様子へのコメント",
+    "url": "https://get-the-dream.com/20260407",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 8,
+    "theme": "発言パターン　あいさつからの流れ② – 天候へのコメント",
+    "url": "https://get-the-dream.com/20260408",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 9,
+    "theme": "発言パターン　あいさつからの流れ③ – 気になる話題",
+    "url": "https://get-the-dream.com/20260409",
+    "status": "本文取得済み",
+    "keySentence": "Good morning. Did you manage to prepare the materials for the meeting?"
+  },
+  {
+    "lesson": 10,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260410",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 11,
+    "theme": "発言パターン　初对面① – 気軽な初対面",
+    "url": "https://get-the-dream.com/20260413",
+    "status": "本文取得済み",
+    "keySentence": "Nice to meet you, Alex. I’m Yukiko from Onishi Innovation."
+  },
+  {
+    "lesson": 12,
+    "theme": "発言パターン　初対面② – フォーマルな初対面",
+    "url": "https://get-the-dream.com/20260414",
+    "status": "本文取得済み",
+    "keySentence": "It’s a pleasure to meet you. I’ve heard so much about you."
+  },
+  {
+    "lesson": 13,
+    "theme": "発言パターン　話し合いを求める①",
+    "url": "https://get-the-dream.com/20260415",
+    "status": "本文取得済み",
+    "keySentence": "Hey, do you have a minute?"
+  },
+  {
+    "lesson": 14,
+    "theme": "発言パターン　話し合いを求める② – 内容予告",
+    "url": "https://get-the-dream.com/20260416",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 15,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260417",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 16,
+    "theme": "発言パターン　話し合いを求める③ – 深刻な内容を示唆",
+    "url": "https://get-the-dream.com/20260420",
+    "status": "本文取得済み",
+    "keySentence": "We need to talk and it can’t wait."
+  },
+  {
+    "lesson": 17,
+    "theme": "発言パターン　話し合いを求める④ – 秘密であることを伝える",
+    "url": "https://get-the-dream.com/20260421",
+    "status": "本文取得済み",
+    "keySentence": "Could you keep this to yourself?"
+  },
+  {
+    "lesson": 18,
+    "theme": "発言パターン　話し合いを求める⑤ – さまざまな会話のきっかけ",
+    "url": "https://get-the-dream.com/20260422",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 19,
+    "theme": "発言パターン　話し合いを求める⑥ – ニュースを伝える",
+    "url": "https://get-the-dream.com/20260423",
+    "status": "本文取得済み",
+    "keySentence": "Guess what?"
+  },
+  {
+    "lesson": 20,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260424",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 21,
+    "theme": "会話原則　協調 – 興味を示せ①",
+    "url": "https://get-the-dream.com/20260504",
+    "status": "本文取得済み",
+    "keySentence": "Guess what?"
+  },
+  {
+    "lesson": 22,
+    "theme": "会話原則　協調 – 興味を示せ②",
+    "url": "https://get-the-dream.com/20260505",
+    "status": "本文取得済み",
+    "keySentence": "I saw you working in your garden yesterday. – Oh, did you?"
+  },
+  {
+    "lesson": 23,
+    "theme": "会話原則　流れ – 依頼の流れ",
+    "url": "https://get-the-dream.com/20260506",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 24,
+    "theme": "会話原則　流れ – 疑問文への流れ",
+    "url": "https://get-the-dream.com/20260507",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 25,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260508",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 26,
+    "theme": "会話原則　流れ – 「引いて・押せ」の基本",
+    "url": "https://get-the-dream.com/20260511",
+    "status": "本文取得済み",
+    "keySentence": "Yeah, but I already promised my friends I’d join their study group."
+  },
+  {
+    "lesson": 27,
+    "theme": "会話原則　流れ – 議論で使える「引いて・押せ」",
+    "url": "https://get-the-dream.com/20260512",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 28,
+    "theme": "会話原則　流れ – 会話はキャッチボール",
+    "url": "https://get-the-dream.com/20260513",
+    "status": "本文取得済み",
+    "keySentence": "What do you think?"
+  },
+  {
+    "lesson": 29,
+    "theme": "会話原則　流れ – 話題変更",
+    "url": "https://get-the-dream.com/20260514",
+    "status": "本文取得済み",
+    "keySentence": "Speaking of food, how about grabbing a bite before heading home?"
+  },
+  {
+    "lesson": 30,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260515",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 31,
+    "theme": "会話原則　遮らない – 会話文は不完全",
+    "url": "https://get-the-dream.com/20260518",
+    "status": "本文取得済み",
+    "keySentence": "There’s a gas station about, I dunno, ten minutes or so from here."
+  },
+  {
+    "lesson": 32,
+    "theme": "会話原則　理解 – 発言を聞き返す",
+    "url": "https://get-the-dream.com/20260519",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 33,
+    "theme": "会話原則　理解 – 謝罪は明瞭に",
+    "url": "https://get-the-dream.com/20260520",
+    "status": "本文取得済み",
+    "keySentence": "Sorry to be late. Traffic was terrible."
+  },
+  {
+    "lesson": 34,
+    "theme": "会話原則　理解 – 感謝は明瞭に",
+    "url": "https://get-the-dream.com/20260521",
+    "status": "本文取得済み",
+    "keySentence": "Thank you for having me today,"
+  },
+  {
+    "lesson": 35,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260522",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 36,
+    "theme": "会話原則　配慮 – 相手の状況に配慮する",
+    "url": "https://get-the-dream.com/20260525",
+    "status": "本文取得済み",
+    "keySentence": "Sorry to interrupt, but a Mr. Cole just called."
+  },
+  {
+    "lesson": 37,
+    "theme": "会話原則　配慮 – ショックへのクッション",
+    "url": "https://get-the-dream.com/20260526",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 38,
+    "theme": "会話原則　配慮 – やわらかく表現をする",
+    "url": "https://get-the-dream.com/20260527",
+    "status": "本文取得済み",
+    "keySentence": "I think you should add just a little more salt."
+  },
+  {
+    "lesson": 39,
+    "theme": "会話原則　配慮 – 相手の心情に配慮する",
+    "url": "https://get-the-dream.com/20260528",
+    "status": "本文取得済み",
+    "keySentence": "I don’t mean to be rude, but you always check your phone at dinner."
+  },
+  {
+    "lesson": 40,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260529",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 41,
+    "theme": "アドバイス – 強いアドバイス①",
+    "url": "https://get-the-dream.com/20260601",
+    "status": "本文取得済み",
+    "keySentence": "You must expect delays."
+  },
+  {
+    "lesson": 42,
+    "theme": "アドバイス – 強いアドバイス②",
+    "url": "https://get-the-dream.com/20260602",
+    "status": "本文取得済み",
+    "keySentence": "It’s important to look for solutions, not winners."
+  },
+  {
+    "lesson": 43,
+    "theme": "アドバイス – should を使う",
+    "url": "https://get-the-dream.com/20260603",
+    "status": "本文取得済み",
+    "keySentence": "I think you should call her right now and explain that, honestly."
+  },
+  {
+    "lesson": 44,
+    "theme": "アドバイス – 穏やかなアドバイス①",
+    "url": "https://get-the-dream.com/20260604",
+    "status": "本文取得済み",
+    "keySentence": "It might be a good idea to go to the gym or do some light exercise."
+  },
+  {
+    "lesson": 45,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260605",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 46,
+    "theme": "アドバイス – 穏やかなアドバイス②",
+    "url": "https://get-the-dream.com/20260608",
+    "status": "本文取得済み",
+    "keySentence": "It’s totally up to you, but maybe you should take it back to Garage Hiroto."
+  },
+  {
+    "lesson": 47,
+    "theme": "アドバイス – 心理負担の軽減",
+    "url": "https://get-the-dream.com/20260609",
+    "status": "本文取得済み",
+    "keySentence": "It doesn’t take much – just looking at them every day."
+  },
+  {
+    "lesson": 48,
+    "theme": "発言パターン　助力を申し出る – 丁寧・フォーマル",
+    "url": "https://get-the-dream.com/20260610",
+    "status": "本文取得済み",
+    "keySentence": "Would you like me to join the meeting?"
+  },
+  {
+    "lesson": 49,
+    "theme": "発言パターン　助力を申し出る – やや丁寧",
+    "url": "https://get-the-dream.com/20260611",
+    "status": "本文取得済み",
+    "keySentence": "I’d be happy to guide you there."
+  },
+  {
+    "lesson": 50,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260612",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 51,
+    "theme": "発言パターン　助力を申し出る – 万能表現",
+    "url": "https://get-the-dream.com/20260615",
+    "status": "本文取得済み",
+    "keySentence": "Can I give you a hand?"
+  },
+  {
+    "lesson": 52,
+    "theme": "発言パターン　助力を申し出る – カジュアルな表現",
+    "url": "https://get-the-dream.com/20260616",
+    "status": "本文取得済み",
+    "keySentence": "I’ll get it."
+  },
+  {
+    "lesson": 53,
+    "theme": "発言パターン　助力を申し出る – 準備がある",
+    "url": "https://get-the-dream.com/20260617",
+    "status": "本文取得済み",
+    "keySentence": "We’re open to any other suggestions you might have."
+  },
+  {
+    "lesson": 54,
+    "theme": "発言パターン　食べ物をすすめる①",
+    "url": "https://get-the-dream.com/20260618",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 55,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260619",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 56,
+    "theme": "発言パターン　食べ物をすすめる②",
+    "url": "https://get-the-dream.com/20260622",
+    "status": "本文取得済み",
+    "keySentence": "Help yourself to some coffee in the office."
+  },
+  {
+    "lesson": 57,
+    "theme": "発言パターン　食べ物のすすめを断る",
+    "url": "https://get-the-dream.com/20260623",
+    "status": "本文取得済み",
+    "keySentence": "Everything’s been wonderful, thank you. But we’re all set."
+  },
+  {
+    "lesson": 58,
+    "theme": "シナリオ　ホテルへのチェックイン",
+    "url": "https://get-the-dream.com/20260624",
+    "status": "本文取得済み",
+    "keySentence": "Hi, I have a reservation. I booked it online. My name is David Evans."
+  },
+  {
+    "lesson": 59,
+    "theme": "シナリオ　ホテルからのチェックアウト",
+    "url": "https://get-the-dream.com/20260625",
+    "status": "本文取得済み",
+    "keySentence": "Good morning. I’d like to check out, please."
+  },
+  {
+    "lesson": 60,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260626",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 61,
+    "theme": "発言パターン　参加をうながす① – カジュアルに",
+    "url": "https://get-the-dream.com/20260629",
+    "status": "本文取得済み",
+    "keySentence": "You coming?"
+  },
+  {
+    "lesson": 62,
+    "theme": "発言パターン　参加をうながす② – 丁寧に・しっかりと",
+    "url": "https://get-the-dream.com/20260630",
+    "status": "本文取得済み",
+    "keySentence": "We’d be happy if you could join us."
+  },
+  {
+    "lesson": 63,
+    "theme": "発言パターン　食事制限を尋ねる",
+    "url": "https://get-the-dream.com/20260701",
+    "status": "本文取得済み",
+    "keySentence": "May I ask if you have any food allergies or dietary restrictions?"
+  },
+  {
+    "lesson": 64,
+    "theme": "発言パターン　同行を申し出る",
+    "url": "https://get-the-dream.com/20260702",
+    "status": "本文取得済み",
+    "keySentence": "I’ll go with you."
+  },
+  {
+    "lesson": 65,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260703",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 66,
+    "theme": "発言パターン　選択① – 選択権を与える（カジュアル）",
+    "url": "https://get-the-dream.com/20260706",
+    "status": "本文取得済み",
+    "keySentence": "Your call."
+  },
+  {
+    "lesson": 67,
+    "theme": "発言パターン　選択② – 選択権を与える（丁寧）",
+    "url": "https://get-the-dream.com/20260707",
+    "status": "本文取得済み",
+    "keySentence": "That’s for you to decide."
+  },
+  {
+    "lesson": 68,
+    "theme": "発言パターン　選択③ – よりよい選択肢を示す",
+    "url": "https://get-the-dream.com/20260708",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 69,
+    "theme": "発言パターン　心配する",
+    "url": "https://get-the-dream.com/20260709",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 70,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260710",
+    "status": "本文未取得・再確認が必要",
+    "keySentence": null
+  },
+  {
+    "lesson": 71,
+    "theme": "発言パターン　相手を支えるひと言",
+    "url": "https://get-the-dream.com/20260713",
+    "status": "本文取得済み",
+    "keySentence": "Don’t push yourself too hard, OK?"
+  },
+  {
+    "lesson": 72,
+    "theme": "発言パターン　提案① – カジュアルな提案",
+    "url": "https://get-the-dream.com/20260714",
+    "status": "本文取得済み",
+    "keySentence": "How about grabbing a burger?"
+  },
+  {
+    "lesson": 73,
+    "theme": "発言パターン　提案② – suggest. should による提案",
+    "url": "https://get-the-dream.com/20260715",
+    "status": "本文取得済み",
+    "keySentence": "I suggest hiring a housekeeper."
+  },
+  {
+    "lesson": 74,
+    "theme": "発言パターン　提案③ – フォーマルな提案・強い提案",
+    "url": "https://get-the-dream.com/20260716",
+    "status": "本文取得済み",
+    "keySentence": "I would like to propose a support program for employees who return to work."
+  },
+  {
+    "lesson": 75,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260717",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 76,
+    "theme": "発言パターン　提案④ – 控えめな提案",
+    "url": "https://get-the-dream.com/20260720",
+    "status": "本文取得済み",
+    "keySentence": "What if we baked him a cake ourselves?"
+  },
+  {
+    "lesson": 77,
+    "theme": "発言パターン　推薦する",
+    "url": "https://get-the-dream.com/20260721",
+    "status": "本文取得済み",
+    "keySentence": "If it’s her last meal, I recommend Sushi Yamaga."
+  },
+  {
+    "lesson": 78,
+    "theme": "シナリオ　衣類の購入",
+    "url": "https://get-the-dream.com/20260722",
+    "status": "本文取得済み",
+    "keySentence": "Do you have this in a small?"
+  },
+  {
+    "lesson": 79,
+    "theme": "シナリオ　返品",
+    "url": "https://get-the-dream.com/20260723",
+    "status": "本文取得済み",
+    "keySentence": "I’d like to return this jacket."
+  },
+  {
+    "lesson": 80,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260724",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 81,
+    "theme": "便利フレーズ　よかったね",
+    "url": "https://get-the-dream.com/20260727",
+    "status": "本文取得済み",
+    "keySentence": "Good for you."
+  },
+  {
+    "lesson": 82,
+    "theme": "便利フレーズ　待ちきれない",
+    "url": "https://get-the-dream.com/20260728",
+    "status": "本文取得済み",
+    "keySentence": "I can’t wait to check it out myself."
+  },
+  {
+    "lesson": 83,
+    "theme": "便利フレーズ　信じられない",
+    "url": "https://get-the-dream.com/20260729",
+    "status": "本文取得済み",
+    "keySentence": "I can’t believe it’s a model!"
+  },
+  {
+    "lesson": 84,
+    "theme": "便利フレーズ　まさか",
+    "url": "https://get-the-dream.com/20260730",
+    "status": "本文取得済み",
+    "keySentence": "No way!"
+  },
+  {
+    "lesson": 85,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260731",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 86,
+    "theme": "便利フレーズ　気にしない",
+    "url": "https://get-the-dream.com/20260803",
+    "status": "本文取得済み",
+    "keySentence": "I don’t care about the hours."
+  },
+  {
+    "lesson": 87,
+    "theme": "便利フレーズ　これで決まりだ",
+    "url": "https://get-the-dream.com/20260804",
+    "status": "本文取得済み",
+    "keySentence": "That’s it. That’s exactly what I’ve been looking for."
+  },
+  {
+    "lesson": 88,
+    "theme": "便利フレーズ　疲れた",
+    "url": "https://get-the-dream.com/20260805",
+    "status": "本文取得済み",
+    "keySentence": "I’m exhausted."
+  },
+  {
+    "lesson": 89,
+    "theme": "便利フレーズ　うんざり",
+    "url": "https://get-the-dream.com/20260806",
+    "status": "本文取得済み",
+    "keySentence": "I’m so fed up with this math homework."
+  },
+  {
+    "lesson": 90,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260807",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 91,
+    "theme": "便利フレーズ　何言ってるの",
+    "url": "https://get-the-dream.com/20260817",
+    "status": "本文取得済み",
+    "keySentence": "What are you talking about?"
+  },
+  {
+    "lesson": 92,
+    "theme": "便利フレーズ　お気の毒に",
+    "url": "https://get-the-dream.com/20260818",
+    "status": "本文取得済み",
+    "keySentence": "That’s too bad."
+  },
+  {
+    "lesson": 93,
+    "theme": "便利フレーズ　頑張って",
+    "url": "https://get-the-dream.com/20260819",
+    "status": "本文取得済み",
+    "keySentence": "Good luck."
+  },
+  {
+    "lesson": 94,
+    "theme": "便利フレーズ　よくやりました",
+    "url": "https://get-the-dream.com/20260820",
+    "status": "本文取得済み",
+    "keySentence": "Great job identifying that."
+  },
+  {
+    "lesson": 95,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260821",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 96,
+    "theme": "便利フレーズ　すぐにとりかかります",
+    "url": "https://get-the-dream.com/20260824",
+    "status": "本文取得済み",
+    "keySentence": "I’ll get right on it."
+  },
+  {
+    "lesson": 97,
+    "theme": "便利フレーズ　忙しい",
+    "url": "https://get-the-dream.com/20260825",
+    "status": "本文取得済み",
+    "keySentence": "I’ve got a lot on my plate."
+  },
+  {
+    "lesson": 98,
+    "theme": "シナリオ　レストラン予約",
+    "url": "https://get-the-dream.com/20260826",
+    "status": "本文取得済み",
+    "keySentence": "I’d like to make a reservation for tonight."
+  },
+  {
+    "lesson": 99,
+    "theme": "シナリオ　レストラン予約のキャンセル",
+    "url": "https://get-the-dream.com/20260827",
+    "status": "本文取得済み",
+    "keySentence": "I’m really sorry, but something came up, and I won’t be able to make it."
+  },
+  {
+    "lesson": 100,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260828",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 101,
+    "theme": "発言パターン　聞き返す① – 反射的に",
+    "url": "https://get-the-dream.com/20260831",
+    "status": "本文取得済み",
+    "keySentence": "Sorry?"
+  },
+  {
+    "lesson": 102,
+    "theme": "発言パターン　聞き返す② – しっかりと",
+    "url": "https://get-the-dream.com/20260901",
+    "status": "本文取得済み",
+    "keySentence": "I’m sorry, I didn’t quite catch that. Could you repeat the last part?"
+  },
+  {
+    "lesson": 103,
+    "theme": "発言パターン　聞き返す③ – フォーマルに",
+    "url": "https://get-the-dream.com/20260902",
+    "status": "本文取得済み",
+    "keySentence": "Would you mind going over that once more?"
+  },
+  {
+    "lesson": 104,
+    "theme": "発言パターン　真意を尋ねる①",
+    "url": "https://get-the-dream.com/20260903",
+    "status": "本文取得済み",
+    "keySentence": "What do you mean?"
+  },
+  {
+    "lesson": 105,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260904",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 106,
+    "theme": "発言パターン　真意を尋ねる② – 厳しく",
+    "url": "https://get-the-dream.com/20260907",
+    "status": "本文取得済み",
+    "keySentence": "What’s that supposed to mean?"
+  },
+  {
+    "lesson": 107,
+    "theme": "発言パターン　理由を尋ねる①",
+    "url": "https://get-the-dream.com/20260908",
+    "status": "本文取得済み",
+    "keySentence": "Why did you know he was a great guy?"
+  },
+  {
+    "lesson": 108,
+    "theme": "発言パターン　理由を尋ねる② – トリガー",
+    "url": "https://get-the-dream.com/20260909",
+    "status": "本文取得済み",
+    "keySentence": "What brings you here?"
+  },
+  {
+    "lesson": 109,
+    "theme": "発言パターン　さらに説明を求める①",
+    "url": "https://get-the-dream.com/20260910",
+    "status": "本文取得済み",
+    "keySentence": "Tell me more."
+  },
+  {
+    "lesson": 110,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260911",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 111,
+    "theme": "発言パターン　さらに説明を求める②",
+    "url": "https://get-the-dream.com/20260914",
+    "status": "本文取得済み",
+    "keySentence": "Could you elaborate on that?"
+  },
+  {
+    "lesson": 112,
+    "theme": "発言パターン　理解を確かめる",
+    "url": "https://get-the-dream.com/20260915",
+    "status": "本文取得済み",
+    "keySentence": "So, you’re saying that it was just homework, right?"
+  },
+  {
+    "lesson": 113,
+    "theme": "発言パターン　誤解を正す① – 誤解の指摘",
+    "url": "https://get-the-dream.com/20260916",
+    "status": "本文取得済み",
+    "keySentence": "Don’t get me wrong."
+  },
+  {
+    "lesson": 114,
+    "theme": "発言パターン　誤解を正す② – 正しく伝える",
+    "url": "https://get-the-dream.com/20260917",
+    "status": "本文取得済み",
+    "keySentence": "I don’t want to reduce options – we just need to make the steps easier to follow."
+  },
+  {
+    "lesson": 115,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260918",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 116,
+    "theme": "発言パターン　わかりました",
+    "url": "https://get-the-dream.com/20260921",
+    "status": "本文取得済み",
+    "keySentence": "I see what you mean."
+  },
+  {
+    "lesson": 117,
+    "theme": "発言パターン　わかりません",
+    "url": "https://get-the-dream.com/20260922",
+    "status": "本文取得済み",
+    "keySentence": "I don’t get it."
+  },
+  {
+    "lesson": 118,
+    "theme": "シナリオ 入国審査",
+    "url": "https://get-the-dream.com/20260923",
+    "status": "本文取得済み",
+    "keySentence": "I’m here on business."
+  },
+  {
+    "lesson": 119,
+    "theme": "シナリオ ファストフードの注文",
+    "url": "https://get-the-dream.com/20260924",
+    "status": "本文取得済み",
+    "keySentence": "Can I get a double cheeseburger meal with fries?"
+  },
+  {
+    "lesson": 120,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20260925",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 121,
+    "theme": "発言パターン 指示① – 命令文による指示",
+    "url": "https://get-the-dream.com/20260928",
+    "status": "本文取得済み",
+    "keySentence": "Wake up and get out of bed right now."
+  },
+  {
+    "lesson": 122,
+    "theme": "発言パターン 指示② – 助動詞類などを使った指示",
+    "url": "https://get-the-dream.com/20260929",
+    "status": "本文取得済み",
+    "keySentence": "You’d better go to the hospital and get it checked out."
+  },
+  {
+    "lesson": 123,
+    "theme": "発言パターン 指示③ – 目的語説明型を使った指示",
+    "url": "https://get-the-dream.com/20260930",
+    "status": "本文取得済み",
+    "keySentence": "I need you to take a close look at it and see what’s causing the problem."
+  },
+  {
+    "lesson": 124,
+    "theme": "発言パターン 指示④ – 心に留めるよう指示",
+    "url": "https://get-the-dream.com/20261001",
+    "status": "本文取得済み",
+    "keySentence": "Bear in mind that not every good idea becomes a hit right away."
+  },
+  {
+    "lesson": 125,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20261002",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 126,
+    "theme": "発言パターン 指示⑤ – 必ずするように指示",
+    "url": "https://get-the-dream.com/20261005",
+    "status": "本文取得済み",
+    "keySentence": "Don’t forget to ice it several times a day to reduce the swelling."
+  },
+  {
+    "lesson": 127,
+    "theme": "発言パターン 指示⑥ – 命令文による禁止",
+    "url": "https://get-the-dream.com/20261006",
+    "status": "本文取得済み",
+    "keySentence": "Don’t let this happen again."
+  },
+  {
+    "lesson": 128,
+    "theme": "発言パターン 指示⑦ – 助動詞を用いた禁止",
+    "url": "https://get-the-dream.com/20261007",
+    "status": "本文取得済み",
+    "keySentence": "Employees must not send company files to personal accounts."
+  },
+  {
+    "lesson": 129,
+    "theme": "発言パターン 指示⑧ – そのほかの禁止表現",
+    "url": "https://get-the-dream.com/20261008",
+    "status": "本文取得済み",
+    "keySentence": "You’re not supposed to be back here."
+  },
+  {
+    "lesson": 130,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20261009",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 131,
+    "theme": "発言パターン 警告",
+    "url": "https://get-the-dream.com/20261012",
+    "status": "本文取得済み",
+    "keySentence": "If you cause an accident, there’ll be serious consequences."
+  },
+  {
+    "lesson": 132,
+    "theme": "発言パターン 注意① – マナーを注意",
+    "url": "https://get-the-dream.com/20261013",
+    "status": "本文取得済み",
+    "keySentence": "Watch your manners."
+  },
+  {
+    "lesson": 133,
+    "theme": "発言パターン 注意② – 態度・発言を注意",
+    "url": "https://get-the-dream.com/20261014",
+    "status": "本文取得済み",
+    "keySentence": "Cut the attitude."
+  },
+  {
+    "lesson": 134,
+    "theme": "発言パターン 注意③ – 気になる習慣を注意",
+    "url": "https://get-the-dream.com/20261015",
+    "status": "本文取得済み",
+    "keySentence": "You’re always checking your phone when there are no customers around."
+  },
+  {
+    "lesson": 135,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20261016",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 136,
+    "theme": "発言パターン 危険を知らせる",
+    "url": "https://get-the-dream.com/20261019",
+    "status": "本文取得済み",
+    "keySentence": "Watch out!"
+  },
+  {
+    "lesson": 137,
+    "theme": "発言パターン 不測の事態に備える",
+    "url": "https://get-the-dream.com/20261020",
+    "status": "本文取得済み",
+    "keySentence": "Keep it just in case."
+  },
+  {
+    "lesson": 138,
+    "theme": "シナリオ レンタカーを借りる",
+    "url": "https://get-the-dream.com/20261021",
+    "status": "本文取得済み",
+    "keySentence": "I have a reservation under Evans."
+  },
+  {
+    "lesson": 139,
+    "theme": "シナリオ　スーパーで清算する",
+    "url": "https://get-the-dream.com/20261022",
+    "status": "本文取得済み",
+    "keySentence": "Did you find everything you were looking for today?"
+  },
+  {
+    "lesson": 140,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20261023",
+    "status": "本文取得済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 141,
+    "theme": "発言パターン 依頼① – 依頼の基本",
+    "url": "https://get-the-dream.com/20261102",
+    "status": "本文取得済み",
+    "keySentence": "Hey, can you do me a favor?"
+  },
+  {
+    "lesson": 142,
+    "theme": "発言パターン 依頼② – 丁寧な依頼",
+    "url": "https://get-the-dream.com/20261103",
+    "status": "本文取得済み",
+    "keySentence": "Could you pick up some milk, eggs, and pasta on your way home?"
+  },
+  {
+    "lesson": 143,
+    "theme": "発言パターン 依頼③ – 依頼への流れ１",
+    "url": "https://get-the-dream.com/20261104",
+    "status": "本文取得済み",
+    "keySentence": "I know you're busy, but would you mind watering my flowers?"
+  },
+  {
+    "lesson": 144,
+    "theme": "発言パターン 依頼④ – 依頼への流れ２",
+    "url": "https://get-the-dream.com/20261105",
+    "status": "本文取得済み",
+    "keySentence": "Could you save me a seat near the front?"
+  },
+  {
+    "lesson": 145,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20261106",
+    "status": "本文確認済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 146,
+    "theme": "発言パターン 依頼⑤ – 依頼への応答",
+    "url": "https://get-the-dream.com/20261109",
+    "status": "本文取得済み",
+    "keySentence": "I wish I could, but I already have plans tonight."
+  },
+  {
+    "lesson": 147,
+    "theme": "発言パターン 許可① – 権威に基づく許可",
+    "url": "https://get-the-dream.com/20261110",
+    "status": "本文取得済み",
+    "keySentence": "You may also drive if it doesn't cause any pain."
+  },
+  {
+    "lesson": 148,
+    "theme": "発言パターン 許可② – カジュアルな許可",
+    "url": "https://get-the-dream.com/20261111",
+    "status": "本文取得済み",
+    "keySentence": "I'll let you try it first."
+  },
+  {
+    "lesson": 149,
+    "theme": "発言パターン 時間管理① – 急げ",
+    "url": "https://get-the-dream.com/20261112",
+    "status": "本文確認済み（サイト記事一覧・本文抜粋）",
+    "keySentence": "I need you to go to Accounting right away."
+  },
+  {
+    "lesson": 150,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20261113",
+    "status": "本文確認済み",
+    "keySentence": null
+  },
+  {
+    "lesson": 151,
+    "theme": "発言パターン 時間管理② – 急ぐな",
+    "url": "https://get-the-dream.com/20261116",
+    "status": "本文取得済み",
+    "keySentence": "What's the rush?"
+  },
+  {
+    "lesson": 152,
+    "theme": "発言パターン 時間管理③ – 時間がない",
+    "url": "https://get-the-dream.com/20261117",
+    "status": "本文取得済み",
+    "keySentence": "We have limited time."
+  },
+  {
+    "lesson": 153,
+    "theme": "発言パターン 時間管理④ – 時間は大切",
+    "url": "https://get-the-dream.com/20261118",
+    "status": "本文取得済み",
+    "keySentence": "Don't waste your time on me."
+  },
+  {
+    "lesson": 154,
+    "theme": "発言パターン 時間管理⑤ – 時間厳守",
+    "url": "https://get-the-dream.com/20261119",
+    "status": "本文取得済み",
+    "keySentence": "Don't be late for the meeting this afternoon."
+  },
+  {
+    "lesson": 155,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20261120",
+    "status": "本文確認済み",
+    "keySentence": null
+  }
+]
+  </script>
+
+  <script>
+  (() => {
+    'use strict';
+
+    // ==========================================
+    // 1. カタログ読み込み（Lesson 1〜155、5の倍数は除外）
+    // ==========================================
+    const rawCatalog = JSON.parse(document.querySelector('#catalog').textContent || '[]');
+    // Review回（5の倍数）を自動除外
+    const catalog = rawCatalog.filter(item => item.lesson % 5 !== 0);
+
+    // ==========================================
+    // 2. フォールバック用 DEFAULT_DIALOGS (Lesson 1〜4)
+    // ==========================================
+    const DEFAULT_DIALOGS = [
+      // Lesson 1
+      { lesson: 1, id: "L01-01", ja: "やあ、調子はどう？", en: "Hi. How's it going?" },
+      { lesson: 1, id: "L01-02", ja: "とても順調よ、ありがとう。", en: "Pretty good, thanks." },
+      { lesson: 1, id: "L01-03", ja: "リー教授のレポート、もう終わらせた？", en: "Did you already finish the report for Professor Lee?" },
+      { lesson: 1, id: "L01-04", ja: "うん、昨日の夜遅くに提出したよ。出典をすべて記載するのにものすごく時間がかかったわ。", en: "Yeah, I submitted it late last night. It took me forever to cite all the sources." },
+      { lesson: 1, id: "L01-05", ja: "うらやましいな。僕はまだ半分しか終わってないよ。ケーススタディーにあんなに時間がかかるとは思わなかった。", en: "Lucky you. I'm still halfway through. I didn't realize how long the case study would take." },
+      { lesson: 1, id: "L01-06", ja: "急いだほうがいいよ。締め切りは今日の午後3時だよね？", en: "You'd better hurry. The deadline is three p.m. today, right?" },
+      { lesson: 1, id: "L01-07", ja: "分かってるよ。それまで図書館にこもることになりそうだな。", en: "I know. Guess I'll be living in the library until then." },
+      { lesson: 1, id: "L01-08", ja: "何か食べるのも忘れないでね！", en: "Don't forget to eat something too!" }
+    ];
+
+    // ==========================================
+    // 3. データ管理と初期化 (dialogs.js & localStorage)
+    // ==========================================
+    const STORAGE_KEY_CUSTOM = 'gemini_dialogs_custom_v2';
+    const STORAGE_KEY_RATINGS = 'gemini_dialogs_ratings_v2';
+    const STORAGE_KEY_MODE = 'gemini_dialogs_mode_v2';
+
+    // 確実に EXTERNAL_DIALOGS を取得（window / globalThis / スコープ変数すべてチェック）
+    let externalData = null;
+    try {
+      if (typeof window !== 'undefined' && Array.isArray(window.EXTERNAL_DIALOGS) && window.EXTERNAL_DIALOGS.length > 0) {
+        externalData = window.EXTERNAL_DIALOGS;
+      } else if (typeof globalThis !== 'undefined' && Array.isArray(globalThis.EXTERNAL_DIALOGS) && globalThis.EXTERNAL_DIALOGS.length > 0) {
+        externalData = globalThis.EXTERNAL_DIALOGS;
+      } else if (typeof EXTERNAL_DIALOGS !== 'undefined' && Array.isArray(EXTERNAL_DIALOGS) && EXTERNAL_DIALOGS.length > 0) {
+        externalData = EXTERNAL_DIALOGS;
+      }
+    } catch (e) {
+      console.warn('EXTERNAL_DIALOGS access check:', e);
+    }
+
+    const hasExternal = (externalData !== null && externalData.length > 0);
+    const baseDialogs = hasExternal ? externalData : DEFAULT_DIALOGS;
+
+    function getCustomDialogs() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM) || '{}');
+      } catch {
+        return {};
+      }
+    }
+
+    function saveCustomDialogs(data) {
+      localStorage.setItem(STORAGE_KEY_CUSTOM, JSON.stringify(data));
+    }
+
+    function getRatings() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY_RATINGS) || '{}');
+      } catch {
+        return {};
+      }
+    }
+
+    function saveRatings(data) {
+      localStorage.setItem(STORAGE_KEY_RATINGS, JSON.stringify(data));
+    }
+
+    function getMode() {
+      return localStorage.getItem(STORAGE_KEY_MODE) || 'random'; // 'random' or 'weak'
+    }
+
+    function saveMode(mode) {
+      localStorage.setItem(STORAGE_KEY_MODE, mode);
+    }
+
+    // 指定レッスンの全ダイアログを取得
+    function getDialogsForLesson(lessonNum) {
+      if (lessonNum % 5 === 0) return []; // Review回は除外
+      const custom = getCustomDialogs()[lessonNum];
+      if (Array.isArray(custom) && custom.length > 0) {
+        return custom;
+      }
+      return baseDialogs.filter(d => d.lesson === lessonNum);
+    }
+
+    // 全レッスンのダイアログ一覧を取得
+    function getAllAvailableDialogs() {
+      const all = [];
+      const custom = getCustomDialogs();
+      for (let l = 1; l <= 155; l++) {
+        if (l % 5 === 0) continue;
+        if (Array.isArray(custom[l]) && custom[l].length > 0) {
+          all.push(...custom[l]);
+        } else {
+          all.push(...baseDialogs.filter(d => d.lesson === l));
+        }
+      }
+      return all;
+    }
+
+    // ==========================================
+    // 4. Web Speech API (音声再生)
+    // ==========================================
+    function speak(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const ut = new SpeechSynthesisUtterance(text);
+      ut.lang = 'en-US';
+      ut.rate = 0.95;
+      window.speechSynthesis.speak(ut);
+    }
+
+    // ==========================================
+    // 5. アプリケーションステート & 画面描画
+    // ==========================================
+    const screen = document.querySelector('#screen');
+    let currentLesson = null;
+    let deck = [];
+    let currentCard = null;
+    let isRevealed = false;
+    let searchQuery = '';
+    let currentMode = getMode();
+
+    function esc(s) {
+      return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function pickNextCard(first = false) {
+      if (!deck.length) {
+        currentCard = null;
+        return;
+      }
+      if (deck.length === 1) {
+        currentCard = deck[0];
+        isRevealed = false;
+        return;
+      }
+
+      const ratings = getRatings();
+
+      if (currentMode === 'weak') {
+        const weighted = [];
+        deck.forEach(c => {
+          const id = c.id || `${c.lesson}-${c.ja}`;
+          const r = ratings[id] || { good: 0, again: 0 };
+          let weight = Math.max(1, (r.again * 3) + (r.good === 0 && r.again === 0 ? 2 : 0) - r.good);
+          for (let i = 0; i < weight; i++) {
+            weighted.push(c);
+          }
+        });
+
+        let nextCandidate = weighted[Math.floor(Math.random() * weighted.length)];
+        if (nextCandidate === currentCard && deck.length > 1 && !first) {
+          const filtered = weighted.filter(c => c !== currentCard);
+          if (filtered.length) {
+            nextCandidate = filtered[Math.floor(Math.random() * filtered.length)];
+          }
+        }
+        currentCard = nextCandidate;
+      } else {
+        let nextCandidate = deck[Math.floor(Math.random() * deck.length)];
+        if (nextCandidate === currentCard && deck.length > 1 && !first) {
+          const pool = deck.filter(c => c !== currentCard);
+          nextCandidate = pool[Math.floor(Math.random() * pool.length)];
+        }
+        currentCard = nextCandidate;
+      }
+
+      isRevealed = false;
+    }
+
+    // ------------------------------------------
+    // 画面: レッスン一覧 (Home)
+    // ------------------------------------------
+    function renderHome() {
+      const allCards = getAllAvailableDialogs();
+      const filtered = catalog.filter(l => {
+        if (!searchQuery) return true;
+        const q = searchQuery.toLowerCase();
+        return `${l.lesson} ${l.theme}`.toLowerCase().includes(q);
+      });
+
+      const totalGood = Object.values(getRatings()).reduce((acc, r) => acc + (r.good || 0), 0);
+      const totalAgain = Object.values(getRatings()).reduce((acc, r) => acc + (r.again || 0), 0);
+
+      // 収録レッスン数を計算
+      const activeLessonsCount = catalog.filter(l => getDialogsForLesson(l.lesson).length > 0).length;
+
+      screen.innerHTML = `
+        <div class="mode-bar">
+          <button class="mode-btn ${currentMode === 'random' ? 'active' : ''}" id="modeRandom">🎲 全問ランダム</button>
+          <button class="mode-btn ${currentMode === 'weak' ? 'active' : ''}" id="modeWeak">🔥 できなかった優先</button>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <p class="eyebrow">PRACTICE OVERVIEW</p>
+            <span class="badge ${hasExternal ? 'badge-data' : ''}">
+              ${hasExternal ? `✓ dialogs.js 読み込み成功 (${allCards.length}問)` : `⚠️ DEFAULT_DIALOGS 使用中 (${allCards.length}問)`}
+            </span>
+          </div>
+          <h1 class="title">今日の一問を始める</h1>
+          <p class="muted">日本語を見て頭の中で英作文。現在 <strong>${activeLessonsCount} レッスン・全 ${allCards.length} 問</strong> が復習可能です。</p>
+          
+          <button class="button primary full" id="startAllBtn" style="font-size:17px;padding:16px;">
+            全レッスン (${allCards.length}問) からランダム出題 →
+          </button>
+          
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid #f0f0ea;">
+            <span class="count">習得: <strong>${totalGood}</strong> 回 · 復習中: <strong>${totalAgain}</strong> 回</span>
+            <span class="small">収録: ${activeLessonsCount} / ${catalog.length} レッスン</span>
+          </div>
+        </div>
+
+        <p class="eyebrow">LESSON LIBRARY</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <h2 style="font-size:20px;margin:0;">Lessonを選んで復習</h2>
+          <span class="count">${filtered.length} レッスン表示</span>
+        </div>
+        
+        <input class="search" id="searchInput" placeholder="Lesson番号やテーマ（あいさつ、依頼など）で検索" value="${esc(searchQuery)}">
+
+        <div class="lesson-list">
+          ${filtered.map(l => {
+            const count = getDialogsForLesson(l.lesson).length;
+            return `
+              <button class="lesson" data-lesson="${l.lesson}">
+                <b>Lesson ${String(l.lesson).padStart(3, '0')} · ${esc(l.theme)}</b>
+                <small style="${count > 0 ? 'color:var(--primary);font-weight:600;' : ''}">
+                  ${count > 0 ? `✓ ${count}文収録` : '未登録（追加可能）'}
+                </small>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      document.querySelector('#modeRandom').onclick = () => {
+        currentMode = 'random';
+        saveMode('random');
+        renderHome();
+      };
+      document.querySelector('#modeWeak').onclick = () => {
+        currentMode = 'weak';
+        saveMode('weak');
+        renderHome();
+      };
+
+      document.querySelector('#startAllBtn').onclick = () => {
+        currentLesson = null;
+        deck = allCards;
+        if (!deck.length) {
+          alert('出題できるダイアログがありません。');
+          return;
+        }
+        pickNextCard(true);
+        renderPractice();
+      };
+
+      const searchInput = document.querySelector('#searchInput');
+      searchInput.oninput = (e) => {
+        searchQuery = e.target.value;
+        const pos = e.target.selectionStart;
+        renderHome();
+        const s = document.querySelector('#searchInput');
+        if (s) {
+          s.focus();
+          s.setSelectionRange(pos, pos);
+        }
+      };
+
+      document.querySelectorAll('[data-lesson]').forEach(btn => {
+        btn.onclick = () => {
+          const lNum = parseInt(btn.dataset.lesson, 10);
+          const lObj = catalog.find(x => x.lesson === lNum);
+          const cards = getDialogsForLesson(lNum);
+          if (!cards.length) {
+            renderEdit(lObj);
+            return;
+          }
+          currentLesson = lObj;
+          deck = cards;
+          pickNextCard(true);
+          renderPractice();
+        };
+      });
+    }
+
+    // ------------------------------------------
+    // 画面: 練習画面 (Practice)
+    // ------------------------------------------
+    function renderPractice() {
+      if (!currentCard) {
+        renderHome();
+        return;
+      }
+
+      const lNum = currentCard.lesson;
+      const lObj = catalog.find(x => x.lesson === lNum) || { lesson: lNum, theme: '復習' };
+      const cardId = currentCard.id || `${lNum}-${currentCard.ja}`;
+      const ratings = getRatings();
+      const currentRating = ratings[cardId] || { good: 0, again: 0 };
+
+      screen.innerHTML = `
+        <div class="topline">
+          <button class="back" id="backBtn">← 一覧に戻る</button>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="badge ${currentMode === 'weak' ? 'danger' : ''}">
+              ${currentMode === 'weak' ? '🔥 できなかった優先' : '🎲 全問ランダム'}
+            </span>
+            <span class="count">${currentLesson ? `Lesson ${lNum} · 全${deck.length}文` : `全レッスン横断 (${deck.length}問)`}</span>
+          </div>
+        </div>
+
+        <article class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <p class="eyebrow">Lesson ${String(lNum).padStart(3, '0')} · ${esc(lObj.theme)}</p>
+            ${currentCard.id ? `<span class="badge">${esc(currentCard.id)}</span>` : ''}
+          </div>
+
+          <div class="prompt-box">
+            <p class="muted" style="margin:0 0 6px;font-size:13px;">この日本語を英語で言ってみましょう：</p>
+            <div class="prompt">${esc(currentCard.ja)}</div>
+          </div>
+
+          ${isRevealed ? `
+            <div class="answer-box">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span class="eyebrow" style="color:var(--primary);">模範解答</span>
+                <button class="speech-btn" id="speakBtn">🔊 音声を再生</button>
+              </div>
+              <div class="answer-text" lang="en">${esc(currentCard.en)}</div>
+            </div>
+
+            <p class="muted" style="text-align:center;font-size:13px;margin:20px 0 10px;">自分の解答と比べてどうでしたか？</p>
+            <div class="row">
+              <button class="button secondary" id="againBtn" style="color:#c53030;">できなかった</button>
+              <button class="button primary" id="goodBtn">できた！</button>
+            </div>
+          ` : `
+            <button class="button primary full" id="revealBtn" style="font-size:17px;padding:16px;">答えを見る</button>
+          `}
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:14px;border-top:1px solid #f0f0ea;">
+            <span class="small">この文の成績: できた ${currentRating.good} / もう一度 ${currentRating.again}</span>
+            <button class="back" id="editThisLessonBtn" style="font-size:13px;">このLessonの文を編集</button>
+          </div>
+        </article>
+      `;
+
+      document.querySelector('#backBtn').onclick = () => renderHome();
+      document.querySelector('#editThisLessonBtn').onclick = () => renderEdit(lObj);
+
+      if (!isRevealed) {
+        document.querySelector('#revealBtn').onclick = () => {
+          isRevealed = true;
+          renderPractice();
+          speak(currentCard.en);
+        };
+      } else {
+        document.querySelector('#speakBtn').onclick = () => speak(currentCard.en);
+        
+        document.querySelector('#goodBtn').onclick = () => {
+          const r = getRatings();
+          r[cardId] = r[cardId] || { good: 0, again: 0 };
+          r[cardId].good++;
+          saveRatings(r);
+          pickNextCard();
+          renderPractice();
+        };
+
+        document.querySelector('#againBtn').onclick = () => {
+          const r = getRatings();
+          r[cardId] = r[cardId] || { good: 0, again: 0 };
+          r[cardId].again++;
+          saveRatings(r);
+          pickNextCard();
+          renderPractice();
+        };
+      }
+    }
+
+    // ------------------------------------------
+    // 画面: レッスン文の編集・追加 (Edit)
+    // ------------------------------------------
+    function renderEdit(lObj) {
+      const lNum = lObj.lesson;
+      const currentList = getDialogsForLesson(lNum);
+      const textVal = currentList.map(item => `${item.ja} | ${item.en}`).join('\n');
+
+      screen.innerHTML = `
+        <div class="topline">
+          <button class="back" id="backFromEdit">← 戻る</button>
+          <span class="count">Lesson ${lNum} 編集</span>
+        </div>
+
+        <article class="card">
+          <p class="eyebrow">CUSTOM DIALOG TEXT</p>
+          <h1 class="title">Lesson ${lNum} の文を登録・編集</h1>
+          <p class="muted">${esc(lObj.theme)}</p>
+          <p class="muted" style="font-size:14px;">1行につき「日本語 | English」の形式で入力してください。</p>
+
+          <div class="notice">
+            例：<br>
+            やあ、調子はどう？ | Hi. How's it going?<br>
+            とても順調よ、ありがとう。 | Pretty good, thanks.
+          </div>
+
+          <textarea id="editInput" placeholder="日本語 | English">${esc(textVal)}</textarea>
+
+          <button class="button primary full" id="saveEditBtn">保存して復習を始める</button>
+          <button class="button secondary full" id="resetEditBtn" style="margin-top:8px;">デフォルトに戻す</button>
+        </article>
+      `;
+
+      document.querySelector('#backFromEdit').onclick = () => renderHome();
+
+      document.querySelector('#saveEditBtn').onclick = () => {
+        const lines = document.querySelector('#editInput').value.split('\n');
+        const parsed = [];
+        let seq = 1;
+        lines.forEach(line => {
+          const trimmed = line.trim();
+          if (!trimmed) return;
+          const sep = trimmed.indexOf('|');
+          if (sep > -1) {
+            const ja = trimmed.slice(0, sep).trim();
+            const en = trimmed.slice(sep + 1).trim();
+            if (ja && en) {
+              parsed.push({
+                lesson: lNum,
+                id: `L${String(lNum).padStart(2, '0')}-${String(seq++).padStart(2, '0')}`,
+                ja,
+                en
+              });
+            }
+          }
+        });
+
+        const custom = getCustomDialogs();
+        custom[lNum] = parsed;
+        saveCustomDialogs(custom);
+
+        currentLesson = lObj;
+        deck = parsed.length ? parsed : getDialogsForLesson(lNum);
+        if (deck.length) {
+          pickNextCard(true);
+          renderPractice();
+        } else {
+          renderHome();
+        }
+      };
+
+      document.querySelector('#resetEditBtn').onclick = () => {
+        if (confirm('このLessonのカスタム登録を削除し、初期状態（dialogs.js または DEFAULT_DIALOGS）に戻しますか？')) {
+          const custom = getCustomDialogs();
+          delete custom[lNum];
+          saveCustomDialogs(custom);
+          renderHome();
+        }
+      };
+    }
+
+    // ------------------------------------------
+    // 画面: データ管理（インポート／エクスポート）
+    // ------------------------------------------
+    function renderDataManagement() {
+      screen.innerHTML = `
+        <div class="topline">
+          <button class="back" id="backFromData">← ホームに戻る</button>
+          <span class="count">データ管理</span>
+        </div>
+
+        <article class="card">
+          <p class="eyebrow">STORAGE &amp; BACKUP</p>
+          <h1 class="title">データの管理</h1>
+          <p class="muted">登録文や学習履歴は、お使いのブラウザーの localStorage に安全に保存されています。</p>
+
+          <div style="margin:24px 0;padding:16px;background:#f9fbf8;border:1px solid #e2e8df;border-radius:14px;">
+            <h3 style="font-size:16px;margin:0 0 8px;">データのエクスポート</h3>
+            <p class="small" style="margin-bottom:12px;">現在のすべての登録ダイアログ（カスタム追加分を含む）をJSONファイルとして保存します。</p>
+            <button class="button secondary" id="exportBtn">📥 ダイアログをJSON出力</button>
+          </div>
+
+          <div style="margin:24px 0;padding:16px;background:#f9fbf8;border:1px solid #e2e8df;border-radius:14px;">
+            <h3 style="font-size:16px;margin:0 0 8px;">データのインポート</h3>
+            <p class="small" style="margin-bottom:12px;">以前エクスポートしたJSONファイル、または外部ダイアログJSONを読み込みます。</p>
+            <input type="file" id="importFile" accept=".json" style="margin-bottom:8px;">
+          </div>
+
+          <div style="margin:24px 0;padding:16px;background:#fff5f5;border:1px solid #fed7d7;border-radius:14px;">
+            <h3 style="font-size:16px;margin:0 0 8px;color:#c53030;">学習履歴のリセット</h3>
+            <p class="small" style="margin-bottom:12px;">「できた／できなかった」の成績カウントをリセットします。（登録文は削除されません）</p>
+            <button class="button danger" id="resetRatingsBtn">学習履歴をクリア</button>
+          </div>
+        </article>
+      `;
+
+      document.querySelector('#backFromData').onclick = () => renderHome();
+
+      document.querySelector('#exportBtn').onclick = () => {
+        const all = getAllAvailableDialogs();
+        const blob = new Blob([JSON.stringify(all, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `dialogs_backup_${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+
+      document.querySelector('#importFile').onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const data = JSON.parse(event.target.result);
+            if (!Array.isArray(data)) {
+              alert('JSON形式が不正です。配列データである必要があります。');
+              return;
+            }
+            const custom = getCustomDialogs();
+            let count = 0;
+            data.forEach(item => {
+              if (item.lesson && item.ja && item.en && item.lesson % 5 !== 0) {
+                if (!custom[item.lesson]) custom[item.lesson] = [];
+                custom[item.lesson].push(item);
+                count++;
+              }
+            });
+            saveCustomDialogs(custom);
+            alert(`${count} 件のダイアログをインポートしました！`);
+            renderHome();
+          } catch (err) {
+            alert('ファイルの読み込みに失敗しました: ' + err.message);
+          }
+        };
+        reader.readAsText(file);
+      };
+
+      document.querySelector('#resetRatingsBtn').onclick = () => {
+        if (confirm('すべての学習履歴（できた／できなかったのカウント）を消去しますか？')) {
+          localStorage.removeItem(STORAGE_KEY_RATINGS);
+          alert('学習履歴をリセットしました。');
+          renderDataManagement();
+        }
+      };
+    }
+
+    document.querySelector('#importExportBtn').onclick = () => renderDataManagement();
+
+    window.addEventListener('hashchange', () => {
+      if (location.hash === '#home' || !location.hash) {
+        renderHome();
+      }
+    });
+
+    renderHome();
+  })();
+  </script>
+</body>
+</html>
