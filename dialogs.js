@@ -1,7 +1,7 @@
 /**
- * ラジオ英会話 ダイアログデータ (通年完全版: Lesson 1〜155)
+ * ラジオ英会話 ダイアログデータ (通年完全版: Lesson 1〜160)
  * ※5の倍数（Review回）は除外
- * 全124レッスン・計 941 問
+ * 全128レッスン・計 972 問
  */
 const EXTERNAL_DIALOGS = [
 
@@ -6145,6 +6145,208 @@ const EXTERNAL_DIALOGS = [
     id: "L154-09",
     ja: "すばらしいですね。 それはよい習慣です。",
     en: "Excellent. That’s best practice."
+  },
+
+  // ==========================================
+  // Lesson 156
+  // ==========================================
+  {
+    lesson: 156,
+    id: "L156-01",
+    ja: "ジェームズ、ミラーさんのウェブサイトのリデザイン・プロジェクトのスケジュールを確認したところです。 少し遅れ始めています。",
+    en: "James, I just reviewed the project schedule for Mr. Miller’s website redesign. We’re starting to fall behind."
+  },
+  {
+    lesson: 156,
+    id: "L156-02",
+    ja: "わかっています。 テスト工程が予想より長引いてしまいました。",
+    en: "I know. The testing phase took longer than expected."
+  },
+  {
+    lesson: 156,
+    id: "L156-03",
+    ja: "締め切りまであと3週間しかありません。 私たちは締め切りに間に合わせる必要があります。",
+    en: "The deadline is only three weeks away. We need to meet the deadline."
+  },
+  {
+    lesson: 156,
+    id: "L156-04",
+    ja: "承知しました。 スケジュールを調整して、残っている作業に集中します。",
+    en: "Understood. I’ll adjust the schedule and focus on the remaining tasks."
+  },
+  {
+    lesson: 156,
+    id: "L156-05",
+    ja: "いいですね。 このプロジェクトを最優先にして、毎日進捗を報告してください。",
+    en: "Good. I need you to prioritize this project and keep me updated every day."
+  },
+  {
+    lesson: 156,
+    id: "L156-06",
+    ja: "もちろんです。 予定どおり進められるようにします。",
+    en: "Of course. I’ll make sure we stay on track."
+  },
+  {
+    lesson: 156,
+    id: "L156-07",
+    ja: "ありがとう。 期限内に納品できるよう、できる限りのことをしましょう。",
+    en: "Thank you. Let’s do everything we can to deliver on time."
+  },
+
+  // ==========================================
+  // Lesson 157
+  // ==========================================
+  {
+    lesson: 157,
+    id: "L157-01",
+    ja: "イーサン、そのゲームをもう1時間以上やっているわよ。 先延ばししないで。 まだ宿題が残っているでしょう。",
+    en: "Ethan, you’ve been playing that game for over an hour. Don’t procrastinate. You still have homework to finish."
+  },
+  {
+    lesson: 157,
+    id: "L157-02",
+    ja: "わかってるよ、ママ。 もうすぐ始めるから。",
+    en: "I know, Mom. I’ll start it soon."
+  },
+  {
+    lesson: 157,
+    id: "L157-03",
+    ja: "「もうすぐ」って、必ずしも計画があることにはならないよ。",
+    en: "“Soon” doesn’t always mean you have a plan."
+  },
+  {
+    lesson: 157,
+    id: "L157-04",
+    ja: "それはそうだね。 ところで、ゲストスピーカー探しはどうなってるの?",
+    en: "Fair point. By the way, how’s the guest speaker search going?"
+  },
+  {
+    lesson: 157,
+    id: "L157-05",
+    ja: "いい知らせよ。 オオニシイノベーションのサトウ・ユキコさんが来てくれることになったの。",
+    en: "Good news. Sato Yukiko from Onishi Innovation agreed to come."
+  },
+  {
+    lesson: 157,
+    id: "L157-06",
+    ja: "本当? それはすごいね!",
+    en: "Seriously? That’s awesome!"
+  },
+  {
+    lesson: 157,
+    id: "L157-07",
+    ja: "テクノロジーやその業界で働くことについて話してくれるそうよ。",
+    en: "She’ll talk about technology and working in the industry."
+  },
+  {
+    lesson: 157,
+    id: "L157-08",
+    ja: "ジェニファーが大喜びするよ。 クラブは彼女みたいな人を探していたんだ。",
+    en: "Jennifer is going to be thrilled. The club has been looking for someone like her."
+  },
+
+  // ==========================================
+  // Lesson 158
+  // ==========================================
+  {
+    lesson: 158,
+    id: "L158-01",
+    ja: "リチャード、「のびーるちゃん」の湿度センサーと温度センサーの設定を調整し終わりました。",
+    en: "Richard, I finished adjusting the humidity and temperature sensor settings for Nobiiru-chan."
+  },
+  {
+    lesson: 158,
+    id: "L158-02",
+    ja: "すばらしい。 新しい設定でテストはもうしたかい?",
+    en: "Excellent. Have you tested it with the new settings yet?"
+  },
+  {
+    lesson: 158,
+    id: "L158-03",
+    ja: "まだですが、今日の午後から始められます。",
+    en: "Not yet, but I can start this afternoon."
+  },
+  {
+    lesson: 158,
+    id: "L158-04",
+    ja: "いいね。 早ければ早いほどいい。 来週の本社との会議までに結果が必要だからね。",
+    en: "Good. The sooner, the better. We need results before next week’s meeting with headquarters."
+  },
+  {
+    lesson: 158,
+    id: "L158-05",
+    ja: "同感です。 この変更がうまくいけば、ロサンゼルスでも人形がもっと頻繁に反応するはずです。",
+    en: "I agree. If the changes work, the doll should react more often in Los Angeles."
+  },
+  {
+    lesson: 158,
+    id: "L158-06",
+    ja: "それを期待しているんだよ。",
+    en: "That’s what we’re hoping for."
+  },
+  {
+    lesson: 158,
+    id: "L158-07",
+    ja: "すぐにテストを行って、報告書をまとめます。",
+    en: "I’ll run the tests right away and prepare a report."
+  },
+  {
+    lesson: 158,
+    id: "L158-08",
+    ja: "完璧だ。 結果が出たら知らせてくれ。",
+    en: "Perfect. Keep me posted on the results."
+  },
+
+  // ==========================================
+  // Lesson 159
+  // ==========================================
+  {
+    lesson: 159,
+    id: "L159-01",
+    ja: "やあ、ユイ。 コーディ・ザ・ベアのキーホルダーについての木曜日の会議は、予定どおりだよね?",
+    en: "Hi, Yui. We’re still on for Thursday’s meeting about the Codey the Bear keychain, right?"
+  },
+  {
+    lesson: 159,
+    id: "L159-02",
+    ja: "実はネイサン、あなたにお詫びしなければならないことがあるんです。 こちらで急用ができてしまって。",
+    en: "Actually, Nathan, I owe you an apology. Something urgent came up on my end."
+  },
+  {
+    lesson: 159,
+    id: "L159-03",
+    ja: "えっ? すべて大丈夫かい?",
+    en: "Oh? Is everything OK?"
+  },
+  {
+    lesson: 159,
+    id: "L159-04",
+    ja: "はい、問題ありません。 ただ今週はスケジュールがかなり詰まっていて。 来週の火曜日まで延期していただくことは可能でしょうか?",
+    en: "Yes, everything’s fine. I’m just dealing with a tight schedule this week. Would it be possible to push it back until next Tuesday?"
+  },
+  {
+    lesson: 159,
+    id: "L159-05",
+    ja: "いいですよ。 そうしましょう。",
+    en: "Sure. We can do that."
+  },
+  {
+    lesson: 159,
+    id: "L159-06",
+    ja: "ありがとうございます。 直前になって予定を変更するのは心苦しいのですが。",
+    en: "Thank you. I hate to reschedule at the last minute."
+  },
+  {
+    lesson: 159,
+    id: "L159-07",
+    ja: "気にしないで。 よくあることですから。",
+    en: "Don’t worry about it. It happens."
+  },
+  {
+    lesson: 159,
+    id: "L159-08",
+    ja: "ご理解に感謝します。",
+    en: "I appreciate your understanding."
   }
 ];
 

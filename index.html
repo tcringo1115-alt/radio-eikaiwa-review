@@ -259,7 +259,7 @@
     }
   </style>
   <!-- キャッシュバスター付きで dialogs.js を読み込み -->
-  <script src="./dialogs.js?v=20261123_all"></script>
+  <script src="./dialogs.js?v=20261128_all"></script>
 </head>
 <body>
   <main class="wrap">
@@ -1362,6 +1362,41 @@
     "url": "https://get-the-dream.com/20261120",
     "status": "本文確認済み",
     "keySentence": null
+  },
+  {
+    "lesson": 156,
+    "theme": "発言パターン 時間管理⑥ – 締め切り",
+    "url": "https://get-the-dream.com/20261123",
+    "status": "本文取得済み",
+    "keySentence": "We need to meet the deadline."
+  },
+  {
+    "lesson": 157,
+    "theme": "発言パターン 時間管理⑦ – 先延ばしするな",
+    "url": "https://get-the-dream.com/20261124",
+    "status": "本文取得済み",
+    "keySentence": "Don't procrastinate."
+  },
+  {
+    "lesson": 158,
+    "theme": "発言パターン 時間管理⑧ – 早めの行動をうながす",
+    "url": "https://get-the-dream.com/20261125",
+    "status": "本文取得済み",
+    "keySentence": "The sooner, the better."
+  },
+  {
+    "lesson": 159,
+    "theme": "発言パターン 時間管理⑨ – スケジュール",
+    "url": "https://get-the-dream.com/20261126",
+    "status": "本文取得済み",
+    "keySentence": "Would it be possible to push it back until next Tuesday?"
+  },
+  {
+    "lesson": 160,
+    "theme": "今週の Review",
+    "url": "https://get-the-dream.com/20261127",
+    "status": "本文確認済み",
+    "keySentence": null
   }
 ]
   </script>
@@ -1371,7 +1406,7 @@
     'use strict';
 
     // ==========================================
-    // 1. カタログ読み込み（Lesson 1〜155、5の倍数は除外）
+    // 1. カタログ読み込み（Lesson 1〜160、5の倍数は除外）
     // ==========================================
     const rawCatalog = JSON.parse(document.querySelector('#catalog').textContent || '[]');
     // Review回（5の倍数）を自動除外
@@ -1462,7 +1497,7 @@
     function getAllAvailableDialogs() {
       const all = [];
       const custom = getCustomDialogs();
-      for (let l = 1; l <= 155; l++) {
+      for (let l = 1; l <= 160; l++) {
         if (l % 5 === 0) continue;
         if (Array.isArray(custom[l]) && custom[l].length > 0) {
           all.push(...custom[l]);
